@@ -1,0 +1,190 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema",
+    "description": "schema for global-settings.json for policy-as-code https://github.com/Azure/enterprise-azure-policy-as-code/blob/main/Definitions/README.md",
+    "type":"object",
+    "properties": {
+        "managedIdentityLocations":{
+            "description": "Policies with Modify and DeployIfNotExists effects require a Managed Identity for the remediation task. This section defines the location of the managed identity. It is often created in the tenant's primary location. This location can be overridden in the Policy Assignment files",
+            "type":"object",
+            "properties": {
+                "*":{
+                    "description": "match all PacEnvironmentSelector values, not othervise defined",
+                    "$ref": "#/definitions/azLocations"
+                }
+            },
+            "additionalProperties": {
+                "$ref": "#/definitions/azLocations"
+            },
+            "minProperties":1
+        },
+        "globalNotScopes":{
+            "type":"object",
+            "description": "Resource Group patterns allow us to exclude special managed Resource Groups. The exclusion is not dynamic. It is calculated when the deployment scripts execute.",
+            "properties": {
+                "*":{
+                    "description": "any scope. not contained to a specific PacEnvironment",
+                    "type":"array",
+                    "items": {
+                        "$ref": "#/definitions/globalNotScopeValues"
+                    }
+                }
+            },
+            "additionalProperties": {
+                "$ref": "#/definitions/globalNotScopeValues"
+            }
+        },
+        "pacEnvironments":{
+            "type":"array",
+            "items": {
+                "type":"object",
+                "properties": {
+                    "pacSelector":{
+                        "type":"string",
+                        "description": "Matches entry to PacEnvironmentSelector. A star is not valid."
+                    },
+                    "cloud":{
+                        "type":"string",
+                        "enum": [
+                            "AzureCloud",
+                            "AzureUSGovernment",
+                            "AzureGermanCloud"
+                        ],
+                        "default":"AzureCloud",
+                        "description": "Azure environment, Defaults to AzureCloud with a warning"
+                    },
+                    "tenantId":{
+                        "description": "Azure Tenant Id",
+                        "$ref": "#/definitions/guid"
+                    },
+                    "defaultSubscriptionId":{
+                        "description": "Primary subscription for login. If the rootScope is a subscription, the default must match.",
+                        "$ref": "#/definitions/guid"
+                    },
+                    "rootScope":{
+                        "description": "Policy and Initiative definitions are always deployed at this scope. Must contain either a MangementGroupName or a SubscriptionId element",
+                        "oneOf": [
+                            {
+                                "type":"object",
+                                "properties": {
+                                    "SubscriptionId":{
+                                        "$ref": "#/definitions/guid"
+                                    }
+                                },
+                                "required": ["SubscriptionId"]
+                            },
+                            {
+                                "type":"object",
+                                "properties": {
+                                    "ManagementGroupName":{
+                                        "type":"string"
+                                    }
+                                },
+                                "required": ["ManagementGroupName"]
+                            }
+                        ],
+                        "minProperties":1
+                    }
+                }
+            }
+        }
+    },
+    "required": [
+        "managedIdentityLocations",
+        "pacEnvironments"
+    ],
+    "definitions": {
+        "guid":{
+            "type":"string",
+            "pattern": "^[a-fA-F0-9-]{31}$"
+        },
+        "globalNotScopeValues":{
+            "oneOf": [
+                {
+                    "description": "managementgroup scope",
+                    "type":"string",
+                    "pattern": "^\\/providers\\/Microsoft[.]Management\\/managementGroups\\/[a-zA-Z0-9-]{3,}$",
+                    "examples": [
+                        "/providers/Microsoft.Management/managementGroups/myManagementGroupId"
+                    ]
+                },
+                {
+                    "description": "subscriptions scope",
+                    "type":"string",
+                    "pattern": "^\\/subscriptions\\/[a-fA-F0-9-]{31}$",
+                    "examples": [
+                        "/subscriptions/00000000-0000-0000-000000000000"
+                    ]
+                },
+                {
+                    "description": "resourceGroups scope",
+                    "type":"string",
+                    "pattern": "^\\/subscriptions\\/[a-fA-F0-9-]{31}\\/resourceGroups\\/[^\\/]{3,}$",
+                    "examples": [
+                        "/subscriptions/00000000-0000-0000-000000000000/resourceGroups/myResourceGroup"
+                    ]
+                    
+                },
+                {
+                    "description": "resourceGroupPatterns scope",
+                    "type":"string",
+                    "pattern": "^\\/resourceGroupPatterns\\/([*]|)[^\\/*]{1,}([*]|)$",
+                    "examples": [
+                        "/resourceGroupPatterns/name",
+                        "/resourceGroupPatterns/name*",
+                        "/resourceGroupPatterns/*name",
+                        "/resourceGroupPatterns/*name*"
+                    ]
+                }
+            ]
+        },
+        "azLocations":{
+            "type":"string",
+            "enum": [
+                "eastasia",
+                "southeastasia",
+                "centralus",
+                "eastus",
+                "eastus2",
+                "westus",
+                "northcentralus",
+                "southcentralus",
+                "northeurope",
+                "westeurope",
+                "japanwest",
+                "japaneast",
+                "brazilsouth",
+                "australiaeast",
+                "australiasoutheast",
+                "southindia",
+                "centralindia",
+                "westindia",
+                "canadacentral",
+                "canadaeast",
+                "uksouth",
+                "ukwest",
+                "westcentralus",
+                "westus2",
+                "koreacentral",
+                "koreasouth",
+                "francecentral",
+                "francesouth",
+                "australiacentral",
+                "australiacentral2",
+                "uaecentral",
+                "uaenorth",
+                "southafricanorth",
+                "southafricawest",
+                "switzerlandnorth",
+                "switzerlandwest",
+                "germanynorth",
+                "germanywestcentral",
+                "norwaywest",
+                "norwayeast",
+                "brazilsoutheast",
+                "westus3",
+                "swedencentral",
+                "qatarcentral"
+              ]
+        }
+    }
+}
