@@ -30,7 +30,7 @@
                     },
                     "tenantId":{
                         "description": "Azure Tenant Id",
-                        "$ref": "https://raw.githubusercontent.com/nimling/json-schema/main/policy-as-code/common-pac.json#/properties/guide"
+                        "$ref": "https://raw.githubusercontent.com/nimling/json-schema/main/policy-as-code/common-pac.json#/properties/guid"
                     },
                     "defaultSubscriptionId":{
                         "description": "Primary subscription for login. If the rootScope is a subscription, the default must match.",
