@@ -8,13 +8,124 @@
             "properties": {
                 "*":{
                     "description": "match all PacEnvironmentSelector values, not othervise defined",
-                    "$ref": "#/definitions/azLocations"
+                    "$ref": "#/properties/azLocations"
                 }
             },
             "additionalProperties": {
-                "$ref": "#/definitions/azLocations"
+                "$ref": "#/properties/azLocations"
             },
             "minProperties":1
+        },
+        "guid":{
+            "$ref": "https://raw.githubusercontent.com/nimling/json-schema/main/common-json-07.json#/properties/guid"
+        },
+        "globalNotScopes":{
+            "type":"object",
+            "description": "Resource Group patterns allow us to exclude special managed Resource Groups. The exclusion is not dynamic. It is calculated when the deployment scripts execute.",
+            "properties": {
+                "*":{
+                    "description": "any scope. not contained to a specific PacEnvironment",
+                    "type":"array",
+                    "items": {
+                        "$ref": "#/properties/globalNotScopeValues"
+                    }
+                }
+            },
+            "additionalProperties": {
+                "$ref": "#/properties/globalNotScopeValues"
+            }
+        },
+        "globalNotScopeValues":{
+            "oneOf": [
+                {
+                    "description": "managementgroup scope",
+                    "type":"string",
+                    "pattern": "^\\/providers\\/Microsoft[.]Management\\/managementGroups\\/[a-zA-Z0-9-]{3,}$",
+                    "examples": [
+                        "/providers/Microsoft.Management/managementGroups/myManagementGroupId"
+                    ]
+                },
+                {
+                    "description": "subscriptions scope",
+                    "type":"string",
+                    "pattern": "^\\/subscriptions\\/[a-fA-F0-9-]{36}$",
+                    "examples": [
+                        "/subscriptions/00000000-0000-0000-000000000000"
+                    ]
+                },
+                {
+                    "description": "resourceGroups scope",
+                    "type":"string",
+                    "pattern": "^\\/subscriptions\\/[a-fA-F0-9-]{36}\\/resourceGroups\\/[^\\/]{3,}$",
+                    "examples": [
+                        "/subscriptions/00000000-0000-0000-000000000000/resourceGroups/myResourceGroup"
+                    ]
+                    
+                },
+                {
+                    "description": "resourceGroupPatterns scope",
+                    "type":"string",
+                    "pattern": "^\\/resourceGroupPatterns\\/([*]|)[^\\/*]{1,}([*]|)$",
+                    "examples": [
+                        "/resourceGroupPatterns/name",
+                        "/resourceGroupPatterns/name*",
+                        "/resourceGroupPatterns/*name",
+                        "/resourceGroupPatterns/*name*"
+                    ]
+                }
+            ]
+        },
+        "azLocations":{
+            "type":"string",
+            "enum": [
+                "eastasia",
+                "southeastasia",
+                "centralus",
+                "eastus",
+                "eastus2",
+                "westus",
+                "northcentralus",
+                "southcentralus",
+                "northeurope",
+                "westeurope",
+                "japanwest",
+                "japaneast",
+                "brazilsouth",
+                "australiaeast",
+                "australiasoutheast",
+                "southindia",
+                "centralindia",
+                "westindia",
+                "canadacentral",
+                "canadaeast",
+                "uksouth",
+                "ukwest",
+                "westcentralus",
+                "westus2",
+                "koreacentral",
+                "koreasouth",
+                "francecentral",
+                "francesouth",
+                "australiacentral",
+                "australiacentral2",
+                "uaecentral",
+                "uaenorth",
+                "southafricanorth",
+                "southafricawest",
+                "switzerlandnorth",
+                "switzerlandwest",
+                "germanynorth",
+                "germanywestcentral",
+                "norwaywest",
+                "norwayeast",
+                "brazilsoutheast",
+                "westus3",
+                "swedencentral",
+                "qatarcentral"
+              ]
         }
+    },
+    "definitions": {
+        
     }
 }

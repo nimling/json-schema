@@ -3,35 +3,11 @@
     "description": "schema for global-settings.json for policy-as-code https://github.com/Azure/enterprise-azure-policy-as-code/blob/main/Definitions/README.md",
     "type":"object",
     "properties": {
-        "managedIdentityLocations":{
-            "description": "Policies with Modify and DeployIfNotExists effects require a Managed Identity for the remediation task. This section defines the location of the managed identity. It is often created in the tenant's primary location. This location can be overridden in the Policy Assignment files",
-            "type":"object",
-            "properties": {
-                "*":{
-                    "description": "match all PacEnvironmentSelector values, not othervise defined",
-                    "$ref": "#/definitions/azLocations"
-                }
-            },
-            "additionalProperties": {
-                "$ref": "#/definitions/azLocations"
-            },
-            "minProperties":1
+        "managedIdentityLocation":{
+            "$ref": "https://raw.githubusercontent.com/nimling/json-schema/main/policy-as-code/common-pac.json#/properties/managedIdentityLocation"
         },
         "globalNotScopes":{
-            "type":"object",
-            "description": "Resource Group patterns allow us to exclude special managed Resource Groups. The exclusion is not dynamic. It is calculated when the deployment scripts execute.",
-            "properties": {
-                "*":{
-                    "description": "any scope. not contained to a specific PacEnvironment",
-                    "type":"array",
-                    "items": {
-                        "$ref": "#/definitions/globalNotScopeValues"
-                    }
-                }
-            },
-            "additionalProperties": {
-                "$ref": "#/definitions/globalNotScopeValues"
-            }
+            "$ref": "https://raw.githubusercontent.com/nimling/json-schema/main/policy-as-code/common-pac.json#/properties/globalNotScopes"
         },
         "pacEnvironments":{
             "type":"array",
@@ -54,11 +30,11 @@
                     },
                     "tenantId":{
                         "description": "Azure Tenant Id",
-                        "$ref": "#/definitions/guid"
+                        "$ref": "https://raw.githubusercontent.com/nimling/json-schema/main/policy-as-code/common-pac.json#/properties/guide"
                     },
                     "defaultSubscriptionId":{
                         "description": "Primary subscription for login. If the rootScope is a subscription, the default must match.",
-                        "$ref": "#/definitions/guid"
+                        "$ref": "https://raw.githubusercontent.com/nimling/json-schema/main/policy-as-code/common-pac.json#/properties/guid"
                     },
                     "rootScope":{
                         "description": "Policy and Initiative definitions are always deployed at this scope. Must contain either a MangementGroupName or a SubscriptionId element",
@@ -91,53 +67,5 @@
     "required": [
         "managedIdentityLocations",
         "pacEnvironments"
-    ],
-    "definitions": {
-        "guid":{
-            "$ref": "https://raw.githubusercontent.com/nimling/json-schema/main/common-json-07.json#/properties/guid"
-        },
-        "globalNotScopeValues":{
-            "oneOf": [
-                {
-                    "description": "managementgroup scope",
-                    "type":"string",
-                    "pattern": "^\\/providers\\/Microsoft[.]Management\\/managementGroups\\/[a-zA-Z0-9-]{3,}$",
-                    "examples": [
-                        "/providers/Microsoft.Management/managementGroups/myManagementGroupId"
-                    ]
-                },
-                {
-                    "description": "subscriptions scope",
-                    "type":"string",
-                    "pattern": "^\\/subscriptions\\/[a-fA-F0-9-]{36}$",
-                    "examples": [
-                        "/subscriptions/00000000-0000-0000-000000000000"
-                    ]
-                },
-                {
-                    "description": "resourceGroups scope",
-                    "type":"string",
-                    "pattern": "^\\/subscriptions\\/[a-fA-F0-9-]{36}\\/resourceGroups\\/[^\\/]{3,}$",
-                    "examples": [
-                        "/subscriptions/00000000-0000-0000-000000000000/resourceGroups/myResourceGroup"
-                    ]
-                    
-                },
-                {
-                    "description": "resourceGroupPatterns scope",
-                    "type":"string",
-                    "pattern": "^\\/resourceGroupPatterns\\/([*]|)[^\\/*]{1,}([*]|)$",
-                    "examples": [
-                        "/resourceGroupPatterns/name",
-                        "/resourceGroupPatterns/name*",
-                        "/resourceGroupPatterns/*name",
-                        "/resourceGroupPatterns/*name*"
-                    ]
-                }
-            ]
-        },
-        "azLocations":{
-            "$ref": "https://raw.githubusercontent.com/nimling/json-schema/main/common-json-07.json#/properties/azLocations"
-        }
-    }
+    ]
 }
