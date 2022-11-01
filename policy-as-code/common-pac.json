@@ -1,0 +1,20 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema",
+    "type":"object",
+    "properties": {
+        "managedIdentityLocation":{
+            "description": "Policies with Modify and DeployIfNotExists effects require a Managed Identity for the remediation task. This section defines the location of the managed identity. It is often created in the tenant's primary location. This location can be overridden in the Policy Assignment files",
+            "type":"object",
+            "properties": {
+                "*":{
+                    "description": "match all PacEnvironmentSelector values, not othervise defined",
+                    "$ref": "#/definitions/azLocations"
+                }
+            },
+            "additionalProperties": {
+                "$ref": "#/definitions/azLocations"
+            },
+            "minProperties":1
+        }
+    }
+}
