@@ -1,0 +1,11 @@
+{
+    "$schema": "./global-settings.json",
+    "managedIdentityLocations": {
+        "*": "norwayeast"
+    },
+    "pacEnvironments": [
+        {
+            "defaultSubscriptionId": "2fc03406-b8e8-4767-bd75-24f48cbdb24b"
+        }
+    ]
+}

@@ -4,7 +4,7 @@
     "properties": {
         "guid":{
             "type":"string",
-            "pattern": "^[a-fA-F0-9-]{31}$"
+            "pattern": "^(^([0-9A-Fa-f]{8}[-]?[0-9A-Fa-f]{4}[-]?[0-9A-Fa-f]{4}[-]?[0-9A-Fa-f]{4}[-]?[0-9A-Fa-f]{12})$)$"
         },
         "azLocations":{
             "type":"string",

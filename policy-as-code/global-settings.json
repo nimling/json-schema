@@ -94,8 +94,7 @@
     ],
     "definitions": {
         "guid":{
-            "type":"string",
-            "pattern": "^[a-fA-F0-9-]{31}$"
+            "$ref": "https://raw.githubusercontent.com/nimling/json-schema/main/common-json-07.json#/properties/guid"
         },
         "globalNotScopeValues":{
             "oneOf": [
@@ -138,53 +137,7 @@
             ]
         },
         "azLocations":{
-            "type":"string",
-            "enum": [
-                "eastasia",
-                "southeastasia",
-                "centralus",
-                "eastus",
-                "eastus2",
-                "westus",
-                "northcentralus",
-                "southcentralus",
-                "northeurope",
-                "westeurope",
-                "japanwest",
-                "japaneast",
-                "brazilsouth",
-                "australiaeast",
-                "australiasoutheast",
-                "southindia",
-                "centralindia",
-                "westindia",
-                "canadacentral",
-                "canadaeast",
-                "uksouth",
-                "ukwest",
-                "westcentralus",
-                "westus2",
-                "koreacentral",
-                "koreasouth",
-                "francecentral",
-                "francesouth",
-                "australiacentral",
-                "australiacentral2",
-                "uaecentral",
-                "uaenorth",
-                "southafricanorth",
-                "southafricawest",
-                "switzerlandnorth",
-                "switzerlandwest",
-                "germanynorth",
-                "germanywestcentral",
-                "norwaywest",
-                "norwayeast",
-                "brazilsoutheast",
-                "westus3",
-                "swedencentral",
-                "qatarcentral"
-              ]
+            "$ref": "https://raw.githubusercontent.com/nimling/json-schema/main/common-json-07.json#/properties/azLocations"
         }
     }
 }
