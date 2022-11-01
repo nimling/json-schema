@@ -6,6 +6,10 @@
             "type":"string",
             "pattern": "^(^([0-9A-Fa-f]{8}[-]?[0-9A-Fa-f]{4}[-]?[0-9A-Fa-f]{4}[-]?[0-9A-Fa-f]{4}[-]?[0-9A-Fa-f]{12})$)$"
         },
+        "guid-simple":{
+            "type":"string",
+            "pattern": "^[a-fA-F0-9-]{36}$"
+        },
         "azLocations":{
             "type":"string",
             "enum": [

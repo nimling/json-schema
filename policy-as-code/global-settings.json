@@ -109,7 +109,7 @@
                 {
                     "description": "subscriptions scope",
                     "type":"string",
-                    "pattern": "^\\/subscriptions\\/[a-fA-F0-9-]{31}$",
+                    "pattern": "^\\/subscriptions\\/[a-fA-F0-9-]{36}$",
                     "examples": [
                         "/subscriptions/00000000-0000-0000-000000000000"
                     ]
@@ -117,7 +117,7 @@
                 {
                     "description": "resourceGroups scope",
                     "type":"string",
-                    "pattern": "^\\/subscriptions\\/[a-fA-F0-9-]{31}\\/resourceGroups\\/[^\\/]{3,}$",
+                    "pattern": "^\\/subscriptions\\/[a-fA-F0-9-]{36}\\/resourceGroups\\/[^\\/]{3,}$",
                     "examples": [
                         "/subscriptions/00000000-0000-0000-000000000000/resourceGroups/myResourceGroup"
                     ]
