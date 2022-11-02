@@ -1,5 +1,6 @@
 {
     "$schema": "http://json-schema.org/draft-07/schema",
+    "$id": "https://raw.githubusercontent.com/nimling/json-schema/main/policy-as-code/policy-assignment.json",
     "type":"object",
     "properties": {
         "nodeName":{
