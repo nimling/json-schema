@@ -16,7 +16,7 @@
             "$ref": "./common-pac.json#/properties/globalScopes"
         },
         "notScope":{
-            "$ref": "./policy-as-code/common-pac.json#/properties/globalNotScopes"
+            "$ref": "./common-pac.json#/properties/globalNotScopes"
         },
         "assignment":{
             "$ref": "#/definitions/assignment"
