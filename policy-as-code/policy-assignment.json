@@ -9,14 +9,14 @@
         },
         "managedIdentityLocation":{
             "description": "Selects the Managed Identity location for Policies with DeployIfnotExists and Modify effects.",
-            "$ref": "https://raw.githubusercontent.com/nimling/json-schema/main/policy-as-code/common-pac.json#/properties/managedIdentityLocation"
+            "$ref": "./common-pac.json#/properties/managedIdentityLocation"
         },
         "scope":{
             "description": "List of scopes for assignment.",
-            "$ref": "https://raw.githubusercontent.com/nimling/json-schema/main/policy-as-code/common-pac.json#/properties/globalScopes"
+            "$ref": "./common-pac.json#/properties/globalScopes"
         },
         "notScope":{
-            "$ref": "https://raw.githubusercontent.com/nimling/json-schema/main/policy-as-code/common-pac.json#/properties/globalNotScopes"
+            "$ref": "./policy-as-code/common-pac.json#/properties/globalNotScopes"
         },
         "assignment":{
             "$ref": "#/definitions/assignment"

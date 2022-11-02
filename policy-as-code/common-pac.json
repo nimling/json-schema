@@ -1,6 +1,6 @@
 {
     "$schema": "http://json-schema.org/draft-07/schema",
-    "$comment": "https://raw.githubusercontent.com/nimling/json-schema/main/policy-as-code/common-pac.json#/properties/item",
+    "$id": "https://raw.githubusercontent.com/nimling/json-schema/main/policy-as-code/common-pac.json",
     "type": "object",
     "properties": {
         "managementGroupName": {
@@ -21,7 +21,7 @@
             "minProperties": 1
         },
         "guid": {
-            "$ref": "https://raw.githubusercontent.com/nimling/json-schema/main/common-json-07.json#/properties/guid"
+            "$ref": "./../common-json-07.json#/properties/guid"
         },
         "globalNotScopes": {
             "type": "object",
