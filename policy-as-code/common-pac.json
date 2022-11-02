@@ -56,7 +56,11 @@
                 }
             },
             "additionalProperties": {
-                "$ref": "#/properties/scopeValues"
+                "description": "any scope. not contained to a specific PacEnvironment",
+                "type": "array",
+                "items": {
+                    "$ref": "#/properties/scopeValues"
+                }
             }
         },
         "ScopeMgmt": {
