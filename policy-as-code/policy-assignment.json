@@ -11,10 +11,10 @@
             "$ref": "https://raw.githubusercontent.com/nimling/json-schema/main/policy-as-code/common-pac.json#/properties/managedIdentityLocation"
         },
         "scope":{
-            "$ref": "https://raw.githubusercontent.com/nimling/json-schema/main/policy-as-code/common-pac.json#/properties/scopeValues"
+            "$ref": "https://raw.githubusercontent.com/nimling/json-schema/main/policy-as-code/common-pac.json#/properties/globalScopes"
         },
         "notScope":{
-            "$ref": "https://raw.githubusercontent.com/nimling/json-schema/main/policy-as-code/common-pac.json#/properties/notScopeValues"
+            "$ref": "https://raw.githubusercontent.com/nimling/json-schema/main/policy-as-code/common-pac.json#/properties/globalNotScopes"
         },
         "assignment":{
 
