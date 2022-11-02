@@ -4,10 +4,10 @@
     "type":"object",
     "properties": {
         "managedIdentityLocation":{
-            "$ref": "https://raw.githubusercontent.com/nimling/json-schema/main/policy-as-code/common-pac.json#/properties/managedIdentityLocation"
+            "$ref": "./common-pac.json#/properties/managedIdentityLocation"
         },
         "globalNotScopes":{
-            "$ref": "https://raw.githubusercontent.com/nimling/json-schema/main/policy-as-code/common-pac.json#/properties/globalNotScopes"
+            "$ref": "./common-pac.json#/properties/globalNotScopes"
         },
         "pacEnvironments":{
             "type":"array",

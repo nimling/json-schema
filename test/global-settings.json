@@ -1,3 +1,4 @@
 {
-    "$schema":"https://raw.githubusercontent.com/nimling/json-schema/dev/policy-as-code/policy-assignment.json"
+    "$schema":"./../policy-as-code/policy-assignment.json",
+    
 }
