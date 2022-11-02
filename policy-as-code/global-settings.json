@@ -43,7 +43,7 @@
                                 "type":"object",
                                 "properties": {
                                     "SubscriptionId":{
-                                        "$ref": "#/definitions/guid"
+                                        "$ref": "https://raw.githubusercontent.com/nimling/json-schema/main/policy-as-code/common-pac.json#/properties/guid"
                                     }
                                 },
                                 "required": ["SubscriptionId"]

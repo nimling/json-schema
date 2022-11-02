@@ -3,9 +3,33 @@
     "type":"object",
     "properties": {
         "nodeName":{
+            "description": "arbitrary name of the node for usage by the scripts to pinpoint format errors.",
             "type":"string"
         },
         "managedIdentityLocation":{
+            "description": "Selects the Managed Identity location for Policies with DeployIfnotExists and Modify effects.",
+            "$ref": "https://raw.githubusercontent.com/nimling/json-schema/main/policy-as-code/common-pac.json#/properties/managedIdentityLocation"
+        },
+        "scope":{
+            "$ref": "https://raw.githubusercontent.com/nimling/json-schema/main/policy-as-code/common-pac.json#/properties/scopeValues"
+        },
+        "notScope":{
+            "$ref": "https://raw.githubusercontent.com/nimling/json-schema/main/policy-as-code/common-pac.json#/properties/notScopeValues"
+        },
+        "assignment":{
+
+        },
+        "parameters":{
+
+        },
+        "ignorebranch":{
+
+        },
+        "enforcementMode":{
+
+        },
+        "additionalRoleAssignments":{
+
         }
     },
     "required": ["nodeName"]
