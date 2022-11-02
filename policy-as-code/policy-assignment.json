@@ -11,26 +11,87 @@
             "$ref": "https://raw.githubusercontent.com/nimling/json-schema/main/policy-as-code/common-pac.json#/properties/managedIdentityLocation"
         },
         "scope":{
+            "description": "List of scopes for assignment.",
             "$ref": "https://raw.githubusercontent.com/nimling/json-schema/main/policy-as-code/common-pac.json#/properties/globalScopes"
         },
         "notScope":{
             "$ref": "https://raw.githubusercontent.com/nimling/json-schema/main/policy-as-code/common-pac.json#/properties/globalNotScopes"
         },
         "assignment":{
-
+            "$ref": "#/definitions/assignment"
         },
         "parameters":{
-
+            "description": "Parameter values for the assignment. Specified parameters not defined in the assigned Policy or Initiative are silently ignored.",
+            "type":"object",
+            "additionalProperties": true,
+            "examples": [
+                {
+                    "paramName":"paramValue"
+                },
+                {
+                    "paramName2":["val1","val2"]
+                }
+            ]
         },
         "ignorebranch":{
-
+            "description": "Ignore the rest of the tee staring at this node. Can be used to define future assignments without deploying the assignments."
         },
         "enforcementMode":{
-
+            "description": "Similar to ignoreBranch, it deploys the assignment and sets the assignment to Default or DoNotEnforce. DoNotEnforce allows a what if analysis."
         },
         "additionalRoleAssignments":{
 
+        },
+        "definitionEntry":{
+            "description": "Either this or definitionEntryList",
+            "type":"object",
+            "properties": {
+                "initiativeName":{
+                    "description": "policyName or initiativeName for the assignment. Should not be a fully qualified id",
+                    "type":"string"
+
+                },
+                "friendlyNameToDocumentIfGuid":{
+                    "description": "purely used as a comment to make the JSON more readable if the name is a GUID (optional).",
+                    "type":"string"
+                },
+                "assignment":{
+                    "$ref": "#/definitions/assignment"
+                }
+            }
+        },
+        "definitionEntryList":{
+            "type":"array",
+            "items": {
+                "$ref": "#/properties/definitionEntry"
+            },
+            "minItems":1
         }
     },
-    "required": ["nodeName"]
+    "required": ["nodeName"],
+    "definitions": {
+        "assignment":{
+            "description": "String values are concatenated in each branch. Assignment name lengths are limited to 24. Must exist at least once in every branch.",
+            "type":"object",
+            "properties": {
+                "append":{
+                    "type":"boolean"
+                },
+                "name":{
+                    "type":"string",
+                    "maxLength": 24
+                },
+                "displayName":{
+                    "type":"string"
+                },
+                "description":{
+                    "type":"string"
+                }
+            },
+            "required": [
+                "name",
+                "displayName"
+            ]
+        }
+    }
 }
