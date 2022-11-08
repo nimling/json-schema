@@ -1,92 +1,154 @@
 {
     "$schema": "http://json-schema.org/draft-07/schema",
     "$id": "https://raw.githubusercontent.com/nimling/json-schema/main/policy-as-code/policy-assignment.json",
-    "type":"object",
-    "properties": {
-        "nodeName":{
-            "description": "arbitrary name of the node for usage by the scripts to pinpoint format errors.",
-            "type":"string"
-        },
-        "managedIdentityLocation":{
-            "description": "Selects the Managed Identity location for Policies with DeployIfnotExists and Modify effects.",
-            "$ref": "./common-pac.json#/properties/managedIdentityLocation"
-        },
-        "scope":{
-            "description": "List of scopes for assignment.",
-            "$ref": "./common-pac.json#/properties/globalScopes"
-        },
-        "notScope":{
-            "$ref": "./common-pac.json#/properties/globalNotScopes"
-        },
-        "assignment":{
-            "$ref": "#/definitions/assignment"
-        },
-        "parameters":{
-            "description": "Parameter values for the assignment. Specified parameters not defined in the assigned Policy or Initiative are silently ignored.",
-            "type":"object",
-            "additionalProperties": true,
-            "examples": [
-                {
-                    "paramName":"paramValue"
+    "type": "object",
+    "allOf": [
+        {
+            "type": "object",
+            "properties": {
+                "nodeName": {
+                    "description": "arbitrary name of the node for usage by the scripts to pinpoint format errors.",
+                    "type": "string"
                 },
-                {
-                    "paramName2":["val1","val2"]
+                "managedIdentityLocation": {
+                    "description": "Selects the Managed Identity location for Policies with DeployIfnotExists and Modify effects.",
+                    "$ref": "./common-pac.json#/properties/managedIdentityLocation"
+                },
+                "scope": {
+                    "description": "List of scopes for assignment.",
+                    "$ref": "./common-pac.json#/properties/globalScopes"
+                },
+                "notScope": {
+                    "$ref": "./common-pac.json#/properties/globalNotScopes"
+                },
+                "assignment": {
+                    "$ref": "#/definitions/assignment"
+                },
+                "parameters": {
+                    "description": "Parameter values for the assignment. Specified parameters not defined in the assigned Policy or Initiative are silently ignored.",
+                    "type": "object",
+                    "additionalProperties": true,
+                    "examples": [
+                        {
+                            "paramName": "paramValue"
+                        },
+                        {
+                            "paramName2": [
+                                "val1",
+                                "val2"
+                            ]
+                        }
+                    ]
+                },
+                "ignorebranch": {
+                    "description": "Ignore the rest of the tee staring at this node. Can be used to define future assignments without deploying the assignments.",
+                    "type": "boolean",
+                    "examples": [
+                        true
+                    ]
+                },
+                "enforcementMode": {
+                    "description": "Similar to ignoreBranch, it deploys the assignment and sets the assignment to Default or DoNotEnforce. DoNotEnforce allows a what if analysis.",
+                    "type": "string",
+                    "enum": [
+                        "Default",
+                        "DoNotEnforce"
+                    ],
+                    "default": "Default",
+                    "examples": [
+                        "Default",
+                        "DoNotEnforce"
+                    ]
+                },
+                "additionalRoleAssignments": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "roleDefinitionId": {
+                                "type": "string"
+                            },
+                            "scope": {
+                                "type": "string"
+                            }
+                        },
+                        "examples": [
+                            {
+                                "roleDefinitionId": "",
+                                "scope": ""
+                            }
+                        ]
+                    },
+                    "default": []
                 }
+            },
+            "required": [
+                "nodeName"
             ]
         },
-        "ignorebranch":{
-            "description": "Ignore the rest of the tee staring at this node. Can be used to define future assignments without deploying the assignments."
-        },
-        "enforcementMode":{
-            "description": "Similar to ignoreBranch, it deploys the assignment and sets the assignment to Default or DoNotEnforce. DoNotEnforce allows a what if analysis."
-        },
-        "additionalRoleAssignments":{
-
-        },
-        "definitionEntry":{
+        {
+            "on": [
+                {
+                    "type": "object",
+                    "properties": {
+                        "definitionEntryList": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/definitionEntry"
+                            },
+                            "minItems": 1,
+                            "default": [
+                                {}
+                            ]
+                        }
+                    }
+                },
+                {
+                    "type": "object",
+                    "properties": {
+                        "definitionEntry": {
+                            "$ref": "#/definitions/definitionEntry"
+                        }
+                    }
+                }
+            ]
+        }
+    ],
+    "definitions": {
+        "definitionEntry": {
             "description": "Either this or definitionEntryList",
-            "type":"object",
+            "type": "object",
             "properties": {
-                "initiativeName":{
+                "initiativeName": {
                     "description": "policyName or initiativeName for the assignment. Should not be a fully qualified id",
-                    "type":"string"
-
+                    "type": "string"
                 },
-                "friendlyNameToDocumentIfGuid":{
+                "friendlyNameToDocumentIfGuid": {
                     "description": "purely used as a comment to make the JSON more readable if the name is a GUID (optional).",
-                    "type":"string"
+                    "type": "string"
                 },
-                "assignment":{
+                "assignment": {
                     "$ref": "#/definitions/assignment"
                 }
-            }
-        },
-        "definitionEntryList":{
-            "type":"array",
-            "items": {
-                "$ref": "#/properties/definitionEntry"
             },
-            "minItems":1
-        }
-    },
-    "required": ["nodeName"],
-    "definitions": {
-        "assignment":{
+            "required": ["initiativeName"]
+        },
+        "assignment": {
             "description": "String values are concatenated in each branch. Assignment name lengths are limited to 24. Must exist at least once in every branch.",
-            "type":"object",
+            "type": "object",
             "properties": {
-                "append":{
-                    "type":"boolean"
+                "append": {
+                    "type": "boolean"
                 },
-                "name":{
-                    "type":"string",
+                "name": {
+                    "type": "string",
                     "maxLength": 24
                 },
-                "displayName":{
-                    "type":"string"
+                "displayName": {
+                    "type": "string"
                 },
-                "description":{
-                    "type":"string"
+                "description": {
+                    "type": "string"
                 }
             },
             "required": [

@@ -1,0 +1,14 @@
+{
+    "$schema": "./../policy-as-code/policy-assignment.json",
+    "nodeName": "test",
+    "assignment": {
+        "name": "test",
+        "displayName": "thisassignment"
+    },
+    "additionalRoleAssignments": [
+        {
+            "roleDefinitionId": ""
+        }
+    ]
+
+}

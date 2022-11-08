@@ -30,11 +30,11 @@
                     },
                     "tenantId":{
                         "description": "Azure Tenant Id",
-                        "$ref": "https://raw.githubusercontent.com/nimling/json-schema/main/policy-as-code/common-pac.json#/properties/guid"
+                        "$ref": "./common-pac.json#/properties/guid"
                     },
                     "defaultSubscriptionId":{
                         "description": "Primary subscription for login. If the rootScope is a subscription, the default must match.",
-                        "$ref": "https://raw.githubusercontent.com/nimling/json-schema/main/policy-as-code/common-pac.json#/properties/guid"
+                        "$ref": "./common-pac.json#/properties/guid"
                     },
                     "rootScope":{
                         "description": "Policy and Initiative definitions are always deployed at this scope. Must contain either a MangementGroupName or a SubscriptionId element",
@@ -43,7 +43,7 @@
                                 "type":"object",
                                 "properties": {
                                     "SubscriptionId":{
-                                        "$ref": "https://raw.githubusercontent.com/nimling/json-schema/main/policy-as-code/common-pac.json#/properties/guid"
+                                        "$ref": "./common-pac.json#/properties/guid"
                                     }
                                 },
                                 "required": ["SubscriptionId"]
@@ -60,12 +60,25 @@
                         ],
                         "minProperties":1
                     }
+                },
+                "default":{
+                    "pacSelector":"Prod",
+                    "cloud":"AzureCloud",
+                    "tenantId":"00000000-0000-0000-0000-000000000000",
+                    "defaultSubscriptionId":"00000000-0000-0000-0000-000000000000"
+                    
                 }
-            }
+            },
+            "default":[{
+                "pacSelector":"Prod",
+                "cloud":"AzureCloud",
+                "tenantId":"00000000-0000-0000-0000-000000000000",
+                "defaultSubscriptionId":"00000000-0000-0000-0000-000000000000"
+            }]
         }
     },
     "required": [
-        "managedIdentityLocations",
+        "managedIdentityLocation",
         "pacEnvironments"
     ]
 }

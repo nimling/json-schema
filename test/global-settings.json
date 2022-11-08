@@ -1,4 +1,22 @@
 {
-    "$schema":"./../policy-as-code/policy-assignment.json",
-    
+    "$schema":"./../policy-as-code/global-settings.json",
+    "globalNotScopes": {
+        "*": [
+            "/resourceGroupPatterns/name*"
+        ]
+    },
+    "managedIdentityLocation": {
+        "*": "westeurope"
+    },
+    "pacEnvironments": [
+        {
+            "pacSelector": "Prod",
+            "cloud": "AzureCloud",
+            "tenantId": "00000000-0000-0000-0000-000000000000",
+            "defaultSubscriptionId": "00000000-0000-0000-0000-000000000000",
+            "rootScope":{
+                "SubscriptionId": "00000000-0000-0000-0000-000000000000"
+            }
+        }
+    ]
 }

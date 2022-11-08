@@ -63,67 +63,69 @@
                 }
             }
         },
-        "ScopeMgmt": {
-            "description": "managementgroup scope",
-            "type": "string",
-            "pattern": "^\\/providers\\/Microsoft[.]Management\\/managementGroups\\/[a-zA-Z0-9-]{3,}$",
-            "examples": [
-                "/providers/Microsoft.Management/managementGroups/myManagementGroupId"
-            ]
-        },
-        "scopeSub": {
-            "description": "subscriptions scope",
-            "type": "string",
-            "pattern": "^\\/subscriptions\\/[a-fA-F0-9-]{36}$",
-            "examples": [
-                "/subscriptions/00000000-0000-0000-000000000000"
-            ]
-        },
-        "scopeRg": {
-            "description": "resourceGroups scope",
-            "type": "string",
-            "pattern": "^\\/subscriptions\\/[a-fA-F0-9-]{36}\\/resourceGroups\\/[^\\/]{3,}$",
-            "examples": [
-                "/subscriptions/00000000-0000-0000-000000000000/resourceGroups/myResourceGroup"
-            ]
-        },
-        "scopeRgPattern": {
-            "description": "resourceGroupPatterns scope",
-            "type": "string",
-            "pattern": "^\\/resourceGroupPatterns\\/([*]|)[^\\/*]{1,}([*]|)$",
-            "examples": [
-                "/resourceGroupPatterns/name",
-                "/resourceGroupPatterns/name*",
-                "/resourceGroupPatterns/*name",
-                "/resourceGroupPatterns/*name*"
-            ]
+        "scopes":{
+            "Mgmt": {
+                "description": "managementgroup scope",
+                "type": "string",
+                "pattern": "^\\/providers\\/Microsoft[.]Management\\/managementGroups\\/[a-zA-Z0-9-]{3,}$",
+                "examples": [
+                    "/providers/Microsoft.Management/managementGroups/myManagementGroupId"
+                ]
+            },
+            "Sub": {
+                "description": "subscriptions scope",
+                "type": "string",
+                "pattern": "^\\/subscriptions\\/[a-fA-F0-9-]{36}$",
+                "examples": [
+                    "/subscriptions/00000000-0000-0000-000000000000"
+                ]
+            },
+            "Rg": {
+                "description": "resourceGroups scope",
+                "type": "string",
+                "pattern": "^\\/subscriptions\\/[a-fA-F0-9-]{36}\\/resourceGroups\\/[^\\/]{3,}$",
+                "examples": [
+                    "/subscriptions/00000000-0000-0000-000000000000/resourceGroups/myResourceGroup"
+                ]
+            },
+            "RgPattern": {
+                "description": "resourceGroupPatterns scope",
+                "type": "string",
+                "pattern": "^\\/resourceGroupPatterns\\/([*]|)[^\\/*]{1,}([*]|)$",
+                "examples": [
+                    "/resourceGroupPatterns/name",
+                    "/resourceGroupPatterns/name*",
+                    "/resourceGroupPatterns/*name",
+                    "/resourceGroupPatterns/*name*"
+                ]
+            }
         },
         "scopeValues": {
             "oneOf": [
                 {
-                    "$ref": "#/properties/ScopeMgmt"
+                    "$ref": "#/properties/scopes/Mgmt"
                 },
                 {
-                    "$ref": "#/properties/scopeSub"
+                    "$ref": "#/properties/scopes/Sub"
                 },
                 {
-                    "$ref": "#/properties/scopeRg"
+                    "$ref": "#/properties/scopes/Rg"
                 }
             ]
         },
         "notScopeValues": {
             "oneOf": [
                 {
-                    "$ref": "#/properties/ScopeMgmt"
+                    "$ref": "#/properties/scopes/Mgmt"
                 },
                 {
-                    "$ref": "#/properties/scopeSub"
+                    "$ref": "#/properties/scopes/Sub"
                 },
                 {
-                    "$ref": "#/properties/scopeRg"
+                    "$ref": "#/properties/scopes/Rg"
                 },
                 {
-                    "$ref": "#/properties/scopeRgPattern"
+                    "$ref": "#/properties/scopes/RgPattern"
                 }
             ]
         },
