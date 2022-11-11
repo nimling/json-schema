@@ -1,0 +1,117 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema",
+    "$id": "https://raw.githubusercontent.com/nimling/json-schema/main/policy-as-code/docs.json",
+    "$comment": "Initially made by Philip Meholm(@withholm) for Nimtech(@nimling)",
+    "type":"object",
+    "properties": {
+        "documentAssignments":{
+            "type":"object",
+            "properties": {
+                "environmentCategories":{
+                    "type":"array",
+                    "items": { 
+                        "type":"object",
+                        "properties": {
+                            "pacEnvironment":{
+                                "$ref": "#/definitions/pacenv"
+                            },
+                            "environmentCategory":{
+                                "description": "name used for column headings and referenced in documentationSpecifications below.",
+                                "type":"string"
+                            },
+                            "scopes":{
+                                "description": " used in Markdown output only for the Scopes section as unprocessed tex",
+                                "type":"array",
+                                "items": {
+                                    "type":"string"
+                                }
+                            },
+                            "representativeAssignments":{
+                                "description": "list Policy Assignment ids representing this environmentCategory. The shortName is used for CSV column headings and markdown output.",
+                                "$ref": "#/definitions/ass"
+                            }
+                        },
+                        "required": [
+                            "pacEnvironment",
+                            "environmentCategory",
+                            "representativeAssignments"
+                        ]
+                    }
+                },
+                "documentationSpecifications":{
+                    "type":"array",
+                    "items": {
+                        "type":"object",
+                        "properties": {
+                            "fileNameStem":{
+                                "$ref": "#/definitions/fileNameStem"
+                            },
+                            "environmentCategories":{
+                                "description": "listed as effect columns",
+                                "type":"array",
+                                "items":{
+                                    "type":"string"
+                                }
+                            },
+                            "title":{
+                                "description": "Heading 1 text for Markdown.",
+                                "type":"string"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "documentInitiatives":{
+            "type":"array",
+            "items": {
+                "type":"object",
+                "properties": {
+                    "pacEnvironment":{
+                        "$ref": "#/definitions/pacenv"
+                    },
+                    "fileNameStem":{
+                        "$ref": "#/definitions/fileNameStem"
+                    },
+                    "title":{
+                        "description": "Heading 1 text for Markdown.",
+                        "type":"string"
+                    },
+                    "initiatives":{
+                        "$ref": "#/definitions/ass"
+                    },
+                    "environmentColumnsInCsv":{
+                        "type":"array",
+                        "items": {
+                            "type":"string"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "pacenv":{
+            "description": "References the Policy as Code environment in global-settings.jsonc defining the tenant and root scope where the Policy and Initiative definitions are deployed.",
+            "type":"string"
+        },
+        "fileNameStem":{
+            "description": "file name stem used to construct the filenames. output example: {fileNameStem}-summary.md",
+            "type":"string"
+        },
+        "ass":{
+            "type":"array",
+            "items": {
+                "type":"object",
+                "properties": {
+                    "shortName":{
+                        "type":"string"
+                    },
+                    "id":{
+                        "type":"string"
+                    }
+                }
+            }
+        }
+    }
+}
