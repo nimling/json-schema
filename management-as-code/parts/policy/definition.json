@@ -16,10 +16,23 @@
             "additionalProperties": {
                 "type":"string"
             }
-        }
-        "policyrule":{
-
+        },
+        "policyRule":{
+            "type":"object",
+            "properties": {
+                "if":{
+                    "type":["object","array"]
+                },
+                "then":{
+                    "type":["object","array"]
+                }
+            }
         }
         
-    }
+    },
+    "required": [
+        "policyRule",
+        "id",
+        "parameter"
+    ]
 }
