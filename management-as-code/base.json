@@ -12,13 +12,13 @@
             "$ref": "./parts/scope.json"
         },
         {
-            "$ref": "./parts/policy.json"
+            "$ref": "./parts/policy/assignment.json"
         },
         {
             "$ref": "./parts/config.json"
         },
         {
-            "$ref": "./parts/customPolicy.json"
+            "$ref": "./parts/policy/definition.json"
         }
     ]
 }
