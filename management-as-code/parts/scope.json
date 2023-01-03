@@ -1,0 +1,91 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema",
+    "type":"object",
+    "properties": {
+        "type":{
+            "type":"string",
+            "enum": [
+                "scope"
+            ]
+        },
+        "action":{
+            "type":"string",
+            "description": "what to do when running build on MAC. 'enable'-> normal operations, 'ignore'->ignore this and every thing under it, 'plan'->plan for changes, but dont execute (whatIf)",
+            "enum": [
+                "enable",
+                "ignore",
+                "plan"
+            ],
+            "default":"enable"
+        },
+        "identity":{
+            "type":"object",
+            "oneOf": [
+                {
+                    "properties": {
+                        "id":{
+                            "type":"string"
+                        },
+                        "type":{
+                            "type":"string",
+                            "enum": [
+                                "managementGroups",
+                                "subscritions",
+                                "resourceGroups"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "properties": {
+                        "id":{
+                            "type":"string",
+                            "pattern": "\\w+:\\w+"
+                        },
+                        "type":{
+                            "type":"string",
+                            "enum": [
+                                "tag"
+                            ]
+                        }
+                    }
+                }
+            ],
+            "required": [
+                "id",
+                "type"
+            ]
+        },
+        "tags":{
+            "description": "key-val of tags to set on this environment. lower level tag values will override higher lvl set tags",
+            "additionalProperties": {
+                "type":"object",
+                "properties": {
+                    "value":{
+                        "type":"string"
+                    },
+                    "wildcard":{
+                        "description": "if set, it will update value of tags that match the wildcard search",
+                        "type":"boolean"
+                    },
+                    "action":{
+                        "type":"string",
+                        "enum": [
+                            "alwaysSet",
+                            "ignoreIfExists"
+                        ]
+                    }
+                },
+                "default":{
+                    "value":"",
+                    "wildcard":false,
+                    "action":"alwaysSet"
+                }
+            }
+        }
+    },
+    "required": [
+        "action",
+        "identity"
+    ]
+}

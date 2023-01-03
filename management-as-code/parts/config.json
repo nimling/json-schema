@@ -1,0 +1,22 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema",
+    "type":"object",
+    "description": "Baseline configuration for 'Managment As Code'. The Config is supposed to sit on root of your area. its is also used to figure out the relevant paths for your projects",
+    "properties": {
+        "type":{
+            "type":"string",
+            "enum": [
+                "config"
+            ]
+        },
+        "sources":{
+            "type":"object",
+            "properties": {
+                "environment":{
+                    "description": "Defines where the folder that defines all your environments is. The path should be in relation to this file",
+                    "type":"string"
+                }
+            }
+        }
+    }
+}
